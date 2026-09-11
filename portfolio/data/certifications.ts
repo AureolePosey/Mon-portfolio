@@ -1,0 +1,65 @@
+import type { Certification } from "@/types";
+
+export const certifications: Certification[] = [
+  {
+    id: "datacamp-pyspark",
+    title: "Introduction to PySpark",
+    issuer: "DataCamp",
+    year: "Février 2026",
+    credentialId: "46,222,965",
+    skills: ["PySpark", "Traitement distribué", "Spark DataFrames"],
+  },
+  {
+    id: "datacamp-sql",
+    title: "Introduction to SQL",
+    issuer: "DataCamp",
+    year: "Février 2026",
+    credentialId: "75,600",
+    skills: ["SQL", "Requêtage", "Bases relationnelles"],
+  },
+  {
+    id: "datacamp-pandas",
+    title: "Data Manipulation with pandas",
+    issuer: "DataCamp",
+    year: "Février 2026",
+    credentialId: "45,741,978",
+    skills: ["Pandas", "Data Cleaning", "Data Transformation"],
+  },
+  {
+    id: "coursera-python-for-everybody",
+    title: "Spécialisation Python for Everybody",
+    issuer: "University of Michigan (Coursera)",
+    year: "2025",
+    credentialId: "NWOCE7GZ47HU",
+    skills: [
+      "Python",
+      "Structures de données",
+      "Accès aux données web",
+      "Projet Capstone",
+    ],
+  },
+  {
+    id: "udemy-laravel-php",
+    title: "Laravel & PHP : De Débutant à Expert",
+    issuer: "Udemy",
+    year: "Avril 2025",
+    credentialId: "UC-a955c0d8-5e63-48e5-a637-e0f86f62473c",
+    skills: ["Laravel", "PHP", "MVC"],
+  },
+  {
+    id: "udemy-php-mysql",
+    title: "PHP & MySQL",
+    issuer: "Udemy",
+    year: "Août 2024",
+    credentialId: "UC-54d4f1ea-7eea-4bed-8ece-4d7553d6eea6",
+    skills: ["PHP", "MySQL", "Bases de données"],
+  },
+  {
+    id: "udemy-html-css",
+    title: "HTML & CSS",
+    issuer: "Udemy",
+    year: "Février 2024",
+    credentialId: "UC-9092dda7-6f47-430a-8d69-7637275f5d63",
+    skills: ["HTML", "CSS", "Intégration"],
+  },
+];

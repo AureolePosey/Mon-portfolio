@@ -6,10 +6,10 @@ export default function NotFound() {
     <main className="flex min-h-[60vh] items-center">
       <Container>
         <div className="mx-auto flex max-w-lg flex-col items-center gap-6 text-center">
-          <span className="font-mono text-6xl font-bold text-gradient">
+          <span className="font-mono text-6xl font-medium text-accent">
             404
           </span>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
             Cette page n&apos;existe pas
           </h1>
           <p className="text-base leading-relaxed text-muted">

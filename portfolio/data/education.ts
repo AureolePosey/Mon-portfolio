@@ -22,7 +22,8 @@ export const educations: Education[] = [
     degree:
       "Licence Professionnelle en Informatique, Réseaux et Télécommunications",
     option: "Architecture des Logiciels",
-    school: "ESGIS, École Supérieure de Gestion, d'Informatique et des Sciences",
+    school:
+      "ESGIS, École Supérieure de Gestion, d'Informatique et des Sciences",
     location: "Cotonou, Bénin",
     period: "2019 - 2022",
     level: "Bac +3",
@@ -36,7 +37,8 @@ export const educations: Education[] = [
   },
   {
     id: "dt-maintenance-informatique",
-    degree: "Diplôme de Technicien, Installation et maintenance en informatique",
+    degree:
+      "Diplôme de Technicien, Installation et maintenance en informatique",
     school: "Lycée technique FM Coulibaly",
     location: "Bénin",
     period: "2016 - 2019",

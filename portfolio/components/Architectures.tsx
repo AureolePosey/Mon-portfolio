@@ -8,13 +8,14 @@ export function Architectures() {
     <Section id="architectures" className="bg-band">
       <FadeIn>
         <SectionTitle
+          index="04"
           eyebrow="Architectures"
           title="Schémas de référence"
           subtitle="Les quatre architectures qui structurent mes projets DevOps, et ce que chacune résout concrètement."
         />
       </FadeIn>
 
-      <FadeIn delay={0.08} className="mt-12">
+      <FadeIn delay={0.06} className="mt-12">
         <ArchitectureTabs />
       </FadeIn>
     </Section>

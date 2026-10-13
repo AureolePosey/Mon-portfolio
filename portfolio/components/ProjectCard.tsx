@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Star } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import { PipelineDiagram } from "@/components/PipelineDiagram";
 import { GitHubIcon } from "@/components/ui/BrandIcons";
@@ -14,7 +14,13 @@ import {
 import { cn } from "@/lib/utils";
 import type { Project } from "@/types";
 
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({
+  project,
+  index,
+}: {
+  project: Project;
+  index: string;
+}) {
   const isFeatured = project.featured;
   const isCompleted = project.status === "completed";
 
@@ -28,9 +34,11 @@ export function ProjectCard({ project }: { project: Project }) {
     >
       <div className={cn("flex flex-1 flex-col", isFeatured && "lg:max-w-xl")}>
         <div className="flex flex-wrap items-center gap-2">
+          <span className="font-mono text-sm text-accent">{index}</span>
+
           <span
             className={cn(
-              "rounded-pill border px-2.5 py-1 font-mono text-[11px] font-medium",
+              "rounded-[2px] border px-2 py-[3px] font-mono text-[11px] uppercase tracking-[0.1em]",
               categoryBadgeClasses[project.category],
             )}
           >
@@ -39,7 +47,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
           <span
             className={cn(
-              "rounded-pill border px-2.5 py-1 font-mono text-[11px] font-medium",
+              "rounded-[2px] border px-2 py-[3px] font-mono text-[11px] uppercase tracking-[0.1em]",
               statusBadgeClasses[project.status],
             )}
           >
@@ -47,8 +55,7 @@ export function ProjectCard({ project }: { project: Project }) {
           </span>
 
           {isFeatured ? (
-            <span className="inline-flex items-center gap-1.5 rounded-pill border border-border bg-surface-hover px-2.5 py-1 font-mono text-[11px] font-medium text-muted">
-              <Star className="size-3" aria-hidden />
+            <span className="rounded-[2px] border border-border-strong px-2 py-[3px] font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
               Projet phare
             </span>
           ) : null}
@@ -79,7 +86,7 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.tagline}
         </p>
 
-        <ul className="mt-5 flex flex-wrap gap-2">
+        <ul className="mt-5 flex flex-wrap gap-1.5">
           {project.technologies.slice(0, isFeatured ? 8 : 5).map((tech) => (
             <li key={tech}>
               <TechBadge
@@ -95,8 +102,8 @@ export function ProjectCard({ project }: { project: Project }) {
           ))}
         </ul>
 
-        <div className="mt-auto flex items-center justify-between gap-4 pt-6">
-          <span className="inline-flex items-center gap-1.5 text-sm font-medium text-accent">
+        <div className="mt-auto flex items-center justify-between gap-4 border-t border-border pt-4 text-sm">
+          <span className="inline-flex items-center gap-1.5 font-medium text-accent">
             Voir le projet
             <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </span>
@@ -107,12 +114,13 @@ export function ProjectCard({ project }: { project: Project }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Code source de ${project.title} sur GitHub`}
-              className="relative z-10 inline-flex size-9 items-center justify-center rounded-lg border border-border text-muted transition-colors duration-200 hover:border-border-strong hover:text-foreground"
+              className="relative z-10 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.1em] text-muted transition-colors duration-200 hover:text-foreground"
             >
-              <GitHubIcon className="size-4" />
+              <GitHubIcon className="size-3.5" />
+              Code
             </a>
           ) : project.plannedRepository ? (
-            <span className="font-mono text-[11px] text-muted">
+            <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
               Dépôt à créer
             </span>
           ) : null}
@@ -120,7 +128,7 @@ export function ProjectCard({ project }: { project: Project }) {
       </div>
 
       {isFeatured ? (
-        <div className="mt-8 shrink-0 rounded-card border border-border bg-background/60 p-6 lg:mt-0 lg:w-[22rem]">
+        <div className="mt-8 shrink-0 border-t border-border pt-6 lg:mt-0 lg:w-[20rem] lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
           <p className="mb-5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
             {isCompleted ? "Architecture" : "Architecture prévue"}
           </p>

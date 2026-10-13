@@ -6,8 +6,7 @@ type ButtonVariant = "primary" | "secondary" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary:
-    "bg-accent text-white dark:text-background hover:bg-accent-hover hover:shadow-lg hover:shadow-accent/25",
+  primary: "bg-accent text-white dark:text-background hover:bg-accent-hover",
   secondary:
     "border border-border bg-surface text-foreground hover:bg-surface-hover hover:border-border-strong",
   ghost: "text-muted hover:text-foreground hover:bg-surface-hover",
@@ -20,7 +19,7 @@ const sizeClasses: Record<ButtonSize, string> = {
 };
 
 const baseClasses =
-  "inline-flex items-center justify-center rounded-lg font-medium whitespace-nowrap transition-all duration-200 disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center rounded-[3px] font-medium whitespace-nowrap transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50";
 
 type SharedProps = {
   variant?: ButtonVariant;

@@ -24,15 +24,16 @@ export const categoryBadgeClasses: Record<ProjectCategory, string> = {
 
 export const statusLabels: Record<ProjectStatus, string> = {
   planned: "À venir",
-  "in-progress": "En cours de réalisation",
+  "in-progress": "En cours",
   completed: "Terminé",
 };
 
 export const statusBadgeClasses: Record<ProjectStatus, string> = {
-  planned: "border-border-strong bg-surface-hover text-muted",
-  "in-progress": "border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400",
+  planned: "border-border-strong bg-transparent text-muted",
+  "in-progress":
+    "border-amber-500/40 bg-transparent text-amber-600 dark:text-amber-400",
   completed:
-    "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+    "border-emerald-500/40 bg-transparent text-emerald-600 dark:text-emerald-400",
 };
 
 export const skillLevelLabels: Record<SkillLevel, string> = {
@@ -41,8 +42,20 @@ export const skillLevelLabels: Record<SkillLevel, string> = {
   exploring: "À explorer",
 };
 
-export const skillLevelClasses: Record<SkillLevel, string> = {
-  used: "border-accent/30 bg-accent-soft text-accent",
-  learning: "border-border-strong bg-surface-hover text-foreground",
-  exploring: "border-border bg-surface text-muted",
+export const skillLevelShortLabels: Record<SkillLevel, string> = {
+  used: "utilisé",
+  learning: "apprentissage",
+  exploring: "à explorer",
+};
+
+export const skillLevelTextClasses: Record<SkillLevel, string> = {
+  used: "text-accent",
+  learning: "text-foreground",
+  exploring: "text-muted",
+};
+
+export const skillLevelDotClasses: Record<SkillLevel, string> = {
+  used: "bg-accent",
+  learning: "bg-foreground",
+  exploring: "bg-border-strong",
 };

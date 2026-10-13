@@ -253,7 +253,8 @@ export const projects: Project[] = [
     pipeline: [
       {
         label: "Ingestion",
-        detail: "Lecture des 5 CSV avec schémas explicites, écriture en Parquet",
+        detail:
+          "Lecture des 5 CSV avec schémas explicites, écriture en Parquet",
       },
       {
         label: "Cleaning",
@@ -261,7 +262,8 @@ export const projects: Project[] = [
       },
       {
         label: "Quality Gates",
-        detail: "Contrôles bloquants : volume, taux de rejet, unicité, NOT NULL",
+        detail:
+          "Contrôles bloquants : volume, taux de rejet, unicité, NOT NULL",
       },
       {
         label: "Transformation",

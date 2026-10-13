@@ -7,16 +7,17 @@ import { journeySteps } from "@/data/journey";
 
 export function About() {
   return (
-    <Section id="a-propos" className="relative">
+    <Section id="a-propos">
       <FadeIn>
         <SectionTitle
+          index="01"
           eyebrow="À propos"
           title="Du développement logiciel au DevOps Engineering"
           subtitle="Une évolution construite sur quatre ans de développement web et de mises en production."
         />
       </FadeIn>
 
-      <div className="mt-14 grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+      <div className="mt-14 grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <FadeIn className="lg:sticky lg:top-28 lg:self-start">
           <div className="flex flex-col gap-5 text-base leading-relaxed text-muted">
             <p>
@@ -41,7 +42,7 @@ export function About() {
               et l&apos;observabilité. Chaque brique s&apos;accompagne d&apos;un
               projet pratique, publié sur GitHub au fur et à mesure.
             </p>
-            <p className="rounded-card border border-accent/25 bg-accent-soft p-5 text-foreground">
+            <p className="border-l-2 border-accent pl-5 text-foreground">
               Je ne viens pas au DevOps depuis l&apos;extérieur. J&apos;ai
               développé les applications qu&apos;il s&apos;agit maintenant de
               déployer et d&apos;exploiter.
@@ -58,28 +59,28 @@ export function About() {
                 {isLast ? null : (
                   <span
                     aria-hidden
-                    className="absolute left-[19px] top-12 h-[calc(100%-2rem)] w-px bg-gradient-to-b from-accent/40 to-border sm:left-[23px]"
+                    className="absolute left-[19px] top-12 h-[calc(100%-2rem)] w-px bg-border sm:left-[23px]"
                   />
                 )}
 
                 <span
                   aria-hidden
-                  className="absolute left-0 top-1 inline-flex size-10 items-center justify-center rounded-xl border border-border bg-surface text-accent sm:size-12"
+                  className="absolute left-0 top-1 inline-flex size-10 items-center justify-center rounded-[3px] border border-border bg-surface text-accent sm:size-12"
                 >
                   <Icon name={step.icon} className="size-5" />
                 </span>
 
-                <FadeIn delay={index * 0.06} className={isLast ? "" : "pb-10"}>
+                <FadeIn delay={index * 0.05} className={isLast ? "" : "pb-10"}>
                   <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
-                    {step.label}
+                    {String(index + 1).padStart(2, "0")} / {step.label}
                   </p>
-                  <h3 className="mt-1.5 text-xl font-semibold tracking-tight">
+                  <h3 className="mt-2 text-xl font-semibold tracking-tight">
                     {step.title}
                   </h3>
                   <p className="mt-2.5 text-sm leading-relaxed text-muted">
                     {step.description}
                   </p>
-                  <ul className="mt-4 flex flex-wrap gap-2">
+                  <ul className="mt-4 flex flex-wrap gap-1.5">
                     {step.skills.map((skill) => (
                       <li key={skill}>
                         <TechBadge label={skill} size="sm" />

@@ -83,10 +83,10 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300",
         scrolled || menuOpen
-          ? "border-b border-border bg-background/80 backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent",
+          ? "border-border bg-background/85 backdrop-blur-xl"
+          : "border-transparent bg-transparent",
       )}
     >
       <Container>
@@ -97,10 +97,10 @@ export function Navbar() {
             aria-label={`${site.name}, retour à l'accueil`}
             className="group flex items-center gap-3"
           >
-            <span className="inline-flex size-9 items-center justify-center rounded-lg border border-accent/30 bg-accent-soft font-mono text-sm font-bold text-accent transition-colors duration-200 group-hover:border-accent/60">
+            <span className="inline-flex size-9 items-center justify-center rounded-[3px] border border-accent/40 font-mono text-sm font-medium text-accent transition-colors duration-200 group-hover:border-accent">
               {site.initials}
             </span>
-            <span className="hidden text-sm font-semibold tracking-tight sm:block">
+            <span className="hidden font-mono text-sm tracking-tight sm:block">
               {site.role}
             </span>
           </Link>
@@ -116,16 +116,18 @@ export function Navbar() {
                       href={navHref(link.id)}
                       aria-current={isActive ? "true" : undefined}
                       className={cn(
-                        "relative inline-flex items-center rounded-lg px-3.5 py-2 text-sm transition-colors duration-200",
+                        "relative inline-flex items-center px-3.5 py-2 text-sm transition-colors duration-200",
                         isActive
                           ? "text-foreground"
                           : "text-muted hover:text-foreground",
                       )}
                     >
+                      {link.label}
                       {isActive ? (
                         <motion.span
-                          layoutId="navbar-active-pill"
-                          className="absolute inset-0 rounded-lg border border-border bg-surface"
+                          layoutId="navbar-active"
+                          aria-hidden
+                          className="absolute inset-x-3 bottom-0.5 h-px bg-accent"
                           transition={{
                             type: "spring",
                             stiffness: 380,
@@ -133,7 +135,6 @@ export function Navbar() {
                           }}
                         />
                       ) : null}
-                      <span className="relative z-10">{link.label}</span>
                     </Link>
                   </li>
                 );
@@ -161,7 +162,7 @@ export function Navbar() {
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
               aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-              className="inline-flex size-10 items-center justify-center rounded-lg border border-border bg-surface text-muted transition-colors duration-200 hover:border-border-strong hover:text-foreground lg:hidden"
+              className="inline-flex size-10 items-center justify-center rounded-[3px] border border-border bg-surface text-muted transition-colors duration-200 hover:border-border-strong hover:text-foreground lg:hidden"
             >
               {menuOpen ? (
                 <X className="size-[18px]" aria-hidden />
@@ -181,19 +182,22 @@ export function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden border-t border-border lg:hidden"
           >
-            <Container className="py-4">
+            <Container className="py-2">
               <nav aria-label="Navigation mobile">
-                <ul className="flex flex-col gap-1">
-                  {navLinks.map((link) => (
-                    <li key={link.id}>
+                <ul className="flex flex-col">
+                  {navLinks.map((link, index) => (
+                    <li key={link.id} className="border-b border-border">
                       <Link
                         href={navHref(link.id)}
                         onClick={() => setMenuOpen(false)}
-                        className="block rounded-lg px-3 py-3 text-base text-muted transition-colors duration-200 hover:bg-surface-hover hover:text-foreground"
+                        className="flex items-baseline gap-4 py-3.5 text-base text-muted transition-colors duration-200 hover:text-foreground"
                       >
+                        <span className="font-mono text-[11px] text-accent">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
                         {link.label}
                       </Link>
                     </li>
@@ -205,7 +209,7 @@ export function Navbar() {
                 href={site.cvPath}
                 download
                 variant="secondary"
-                className="mt-4 w-full sm:hidden"
+                className="my-4 w-full sm:hidden"
                 onClick={() => setMenuOpen(false)}
               >
                 <Download className="size-4" aria-hidden />

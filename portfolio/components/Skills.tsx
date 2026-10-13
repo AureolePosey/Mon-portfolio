@@ -1,41 +1,40 @@
-import { Card } from "@/components/ui/Card";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Icon } from "@/components/ui/Icon";
 import { Section } from "@/components/ui/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { skillGroups } from "@/data/skills";
-import { skillLevelClasses, skillLevelLabels } from "@/lib/categories";
+import {
+  skillLevelDotClasses,
+  skillLevelLabels,
+  skillLevelShortLabels,
+  skillLevelTextClasses,
+} from "@/lib/categories";
 import { cn } from "@/lib/utils";
 import type { SkillLevel } from "@/types";
 
 const legend: SkillLevel[] = ["used", "learning", "exploring"];
-
-const badgeClasses =
-  "inline-flex items-center rounded-pill border px-2.5 py-1 font-mono text-[11px] font-medium tracking-tight whitespace-nowrap";
 
 export function Skills() {
   return (
     <Section id="competences" className="bg-band">
       <FadeIn>
         <SectionTitle
+          index="02"
           eyebrow="Compétences"
           title="Compétences techniques"
           subtitle="Chaque technologie porte son niveau réel d'utilisation, pour que vous sachiez ce que je pratique aujourd'hui et ce que je suis en train d'apprendre."
         />
       </FadeIn>
 
-      <FadeIn delay={0.06} className="mt-7">
-        <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
+      <FadeIn delay={0.06} className="mt-8">
+        <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
           {legend.map((level) => (
             <li key={level} className="flex items-center gap-2">
               <span
                 aria-hidden
-                className={cn(
-                  "size-3 rounded-full border",
-                  skillLevelClasses[level],
-                )}
+                className={cn("size-2", skillLevelDotClasses[level])}
               />
-              <span className="text-xs text-muted">
+              <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
                 {skillLevelLabels[level]}
               </span>
             </li>
@@ -43,60 +42,50 @@ export function Skills() {
         </ul>
       </FadeIn>
 
-      <div className="mt-10 grid gap-5 lg:grid-cols-2">
+      <div className="mt-12 grid gap-x-16 gap-y-12 lg:grid-cols-2">
         {skillGroups.map((group, index) => (
-          <FadeIn key={group.id} delay={index * 0.05}>
-            <Card
-              className={cn(
-                "h-full p-6 sm:p-7",
-                group.primary && "border-accent/25",
-              )}
-            >
-              <div className="flex items-start gap-4">
-                <span
-                  className={cn(
-                    "inline-flex size-11 shrink-0 items-center justify-center rounded-xl border",
-                    group.primary
-                      ? "border-accent/30 bg-accent-soft text-accent"
-                      : "border-border bg-surface-hover text-muted",
-                  )}
-                >
-                  <Icon name={group.icon} className="size-5" />
+          <FadeIn key={group.id} delay={index * 0.04}>
+            <div className="flex items-center gap-3 border-b border-border-strong pb-3">
+              <Icon
+                name={group.icon}
+                className={cn(
+                  "size-[18px]",
+                  group.primary ? "text-accent" : "text-muted",
+                )}
+              />
+              <h3 className="text-base font-semibold tracking-tight">
+                {group.title}
+              </h3>
+              {group.primary ? (
+                <span className="ml-auto font-mono text-[10px] uppercase tracking-[0.16em] text-accent">
+                  DevOps
                 </span>
+              ) : null}
+            </div>
 
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <h3 className="text-lg font-semibold tracking-tight">
-                      {group.title}
-                    </h3>
-                    {group.primary ? (
-                      <span className="rounded-pill border border-accent/25 bg-accent-soft px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
-                        DevOps
-                      </span>
-                    ) : null}
-                  </div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {group.description}
-                  </p>
-                </div>
-              </div>
+            <p className="mt-3 text-sm leading-relaxed text-muted">
+              {group.description}
+            </p>
 
-              <ul className="mt-6 flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
-                  <li key={skill.name}>
-                    <span
-                      title={skillLevelLabels[skill.level]}
-                      className={cn(
-                        badgeClasses,
-                        skillLevelClasses[skill.level],
-                      )}
-                    >
-                      {skill.name}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
+            <ul className="mt-5 flex flex-col gap-2.5">
+              {group.skills.map((skill) => (
+                <li
+                  key={skill.name}
+                  className="flex items-baseline gap-3 font-mono text-[13px]"
+                >
+                  <span className="shrink-0 text-foreground">{skill.name}</span>
+                  <span aria-hidden className="leader" />
+                  <span
+                    className={cn(
+                      "shrink-0 text-[11px]",
+                      skillLevelTextClasses[skill.level],
+                    )}
+                  >
+                    {skillLevelShortLabels[skill.level]}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </FadeIn>
         ))}
       </div>

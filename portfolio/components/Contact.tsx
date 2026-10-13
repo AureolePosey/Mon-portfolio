@@ -24,7 +24,7 @@ const channels = [
   },
   {
     label: "GitHub",
-    value: "Projets & code source",
+    value: "Dépôts et code source",
     href: site.github,
     Icon: GitHubIcon,
     external: true,
@@ -33,77 +33,65 @@ const channels = [
 
 export function Contact() {
   return (
-    <section
-      id="contact"
-      className="relative overflow-hidden border-t border-border py-24 sm:py-32"
-    >
-      <div
-        aria-hidden
-        className="bg-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black,transparent)]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 size-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-[100px]"
-      />
+    <section id="contact" className="border-t border-border bg-band">
+      <Container>
+        <div className="grid gap-12 py-20 sm:py-28 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+          <FadeIn>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
+              <span className="text-accent">08 / </span>Contact
+            </p>
 
-      <Container className="relative">
-        <FadeIn className="flex flex-col items-center text-center">
-          <span className="inline-flex items-center gap-2.5 rounded-pill border border-border bg-surface px-3.5 py-1.5 text-xs font-medium text-muted">
-            <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-60" />
-              <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
-            </span>
-            {site.availabilityBadge}
-          </span>
+            <h2 className="mt-6 max-w-xl text-3xl font-semibold tracking-tight text-balance sm:text-[2.5rem] sm:leading-[1.1]">
+              Construisons et déployons des applications fiables
+            </h2>
 
-          <h2 className="mt-7 max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-5xl">
-            Construisons et déployons des applications fiables
-          </h2>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted text-pretty">
+              {site.availability}
+            </p>
 
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted text-pretty sm:text-lg">
-            {site.availability}
-          </p>
+            <p className="mt-5 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+              <MapPin className="size-4" aria-hidden />
+              {site.location}
+            </p>
 
-          <p className="mt-4 inline-flex items-center gap-2 text-sm text-muted">
-            <MapPin className="size-4" aria-hidden />
-            {site.location}
-          </p>
-        </FadeIn>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Button href={`mailto:${site.email}`} size="lg">
+                <Mail className="size-4" aria-hidden />
+                Me contacter
+              </Button>
+              <Button href={site.cvPath} download variant="secondary" size="lg">
+                <Download className="size-4" aria-hidden />
+                Télécharger mon CV
+              </Button>
+            </div>
+          </FadeIn>
 
-        <FadeIn
-          delay={0.1}
-          className="mt-10 flex flex-wrap justify-center gap-3"
-        >
-          <Button href={`mailto:${site.email}`} size="lg">
-            <Mail className="size-4" aria-hidden />
-            Me contacter
-          </Button>
-          <Button href={site.cvPath} download variant="secondary" size="lg">
-            <Download className="size-4" aria-hidden />
-            Télécharger mon CV
-          </Button>
-        </FadeIn>
-
-        <FadeIn delay={0.18} className="mt-14">
-          <ul className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-3">
-            {channels.map(({ label, value, href, Icon, external }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  target={external ? "_blank" : undefined}
-                  rel={external ? "noopener noreferrer" : undefined}
-                  className="flex h-full flex-col items-center gap-2 rounded-card border border-border bg-surface p-5 text-center transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-card-hover"
+          <FadeIn delay={0.08} className="lg:pt-16">
+            <ul className="flex flex-col">
+              {channels.map(({ label, value, href, Icon, external }) => (
+                <li
+                  key={label}
+                  className="border-t border-border last:border-b"
                 >
-                  <Icon className="size-5 text-accent" />
-                  <span className="text-sm font-medium">{label}</span>
-                  <span className="break-all font-mono text-xs text-muted">
-                    {value}
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </FadeIn>
+                  <a
+                    href={href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    className="group flex items-center gap-4 py-5 transition-colors duration-200 hover:text-accent"
+                  >
+                    <Icon className="size-[18px] shrink-0 text-accent" />
+                    <span className="w-24 shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                      {label}
+                    </span>
+                    <span className="min-w-0 break-all font-mono text-sm">
+                      {value}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+        </div>
       </Container>
     </section>
   );

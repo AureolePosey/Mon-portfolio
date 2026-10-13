@@ -1,7 +1,6 @@
 import { Building2, GraduationCap, Terminal, Workflow } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import { Card } from "@/components/ui/Card";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Section } from "@/components/ui/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
@@ -22,6 +21,7 @@ export function Experience() {
     <Section id="parcours">
       <FadeIn>
         <SectionTitle
+          index="05"
           eyebrow="Parcours"
           title="Expérience et formation"
           subtitle="Quatre ans de développement web en entreprise, un parcours d'enseignement, et aujourd'hui une formation Expert DevOps."
@@ -35,82 +35,78 @@ export function Experience() {
           const isHighlighted = experience.kind === "devops";
 
           return (
-            <li key={experience.id} className="relative pl-14 sm:pl-16">
-              {isLast ? null : (
-                <span
-                  aria-hidden
-                  className="absolute left-[19px] top-12 h-[calc(100%-2rem)] w-px bg-border sm:left-[23px]"
-                />
+            <li
+              key={experience.id}
+              className={cn(
+                "grid gap-x-6 gap-y-4 border-t border-border py-8 sm:grid-cols-[13rem_1fr]",
+                isLast && "border-b",
               )}
+            >
+              <div>
+                <p className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                  <KindIcon
+                    className={cn(
+                      "size-4",
+                      isHighlighted ? "text-accent" : "text-muted",
+                    )}
+                    aria-hidden
+                  />
+                  {experience.period}
+                </p>
+                {experience.current ? (
+                  <span className="mt-3 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-emerald-600 dark:text-emerald-400">
+                    <span
+                      aria-hidden
+                      className="size-1.5 rounded-full bg-emerald-500"
+                    />
+                    En cours
+                  </span>
+                ) : null}
+              </div>
 
-              <span
-                aria-hidden
-                className={cn(
-                  "absolute left-0 top-1 inline-flex size-10 items-center justify-center rounded-xl border sm:size-12",
-                  isHighlighted
-                    ? "border-accent/30 bg-accent-soft text-accent"
-                    : "border-border bg-surface text-muted",
-                )}
-              >
-                <KindIcon className="size-5" />
-              </span>
+              <FadeIn delay={index * 0.04}>
+                <h3 className="text-lg font-semibold tracking-tight">
+                  {experience.role}
+                </h3>
 
-              <FadeIn delay={index * 0.06} className={isLast ? "" : "pb-8"}>
-                <Card className="p-6 sm:p-7">
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <h3 className="text-lg font-semibold tracking-tight">
-                      {experience.role}
-                    </h3>
-                    {experience.current ? (
-                      <span className="rounded-pill border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-emerald-600 dark:text-emerald-400">
-                        En cours
-                      </span>
-                    ) : null}
-                  </div>
+                <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted">
+                  <span className="font-medium text-foreground">
+                    {experience.company}
+                  </span>
+                  <span aria-hidden>·</span>
+                  <span>{experience.location}</span>
+                </p>
 
-                  <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted">
-                    <span className="font-medium text-foreground">
-                      {experience.company}
-                    </span>
-                    <span aria-hidden>·</span>
-                    <span>{experience.location}</span>
-                    <span aria-hidden>·</span>
-                    <span className="font-mono text-xs">
-                      {experience.period}
-                    </span>
-                  </p>
+                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted">
+                  {experience.summary}
+                </p>
 
-                  <p className="mt-4 text-sm leading-relaxed text-muted">
-                    {experience.summary}
-                  </p>
+                <ul className="mt-5 flex flex-col gap-2.5">
+                  {experience.highlights.map((highlight) => (
+                    <li
+                      key={highlight}
+                      className="flex gap-3 text-sm leading-relaxed text-muted"
+                    >
+                      <span
+                        aria-hidden
+                        className="mt-[9px] size-1 shrink-0 bg-accent"
+                      />
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
 
-                  <ul className="mt-5 flex flex-col gap-2.5">
-                    {experience.highlights.map((highlight) => (
-                      <li
-                        key={highlight}
-                        className="flex gap-3 text-sm leading-relaxed text-muted"
-                      >
-                        <span
-                          aria-hidden
-                          className="mt-[7px] size-1.5 shrink-0 rounded-full bg-accent"
-                        />
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <ul className="mt-6 flex flex-wrap gap-2">
-                    {experience.technologies.map((technology) => (
-                      <li key={technology}>
-                        <TechBadge
-                          label={technology}
-                          size="sm"
-                          variant={isHighlighted ? "accent" : "default"}
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                </Card>
+                <ul className="mt-6 flex flex-wrap gap-1.5">
+                  {experience.technologies.map((technology) => (
+                    <li key={technology}>
+                      <TechBadge
+                        label={technology}
+                        size="sm"
+                        variant={isHighlighted ? "accent" : "default"}
+                      />
+                    </li>
+                  ))}
+                </ul>
               </FadeIn>
             </li>
           );

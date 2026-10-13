@@ -5,13 +5,13 @@ type BadgeSize = "sm" | "md";
 
 const variantClasses: Record<BadgeVariant, string> = {
   default: "border-border bg-surface text-muted",
-  accent: "border-accent/25 bg-accent-soft text-accent",
+  accent: "border-accent/30 bg-accent-soft text-accent",
   outline: "border-border-strong bg-transparent text-foreground",
 };
 
 const sizeClasses: Record<BadgeSize, string> = {
-  sm: "px-2.5 py-1 text-[11px]",
-  md: "px-3 py-1.5 text-xs",
+  sm: "px-2 py-[3px] text-[11px]",
+  md: "px-2.5 py-1 text-xs",
 };
 
 export function TechBadge({
@@ -28,7 +28,7 @@ export function TechBadge({
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-pill border font-mono font-medium tracking-tight whitespace-nowrap transition-colors duration-200",
+        "inline-flex items-center rounded-[2px] border font-mono font-medium tracking-tight whitespace-nowrap transition-colors duration-200",
         variantClasses[variant],
         sizeClasses[size],
         className,

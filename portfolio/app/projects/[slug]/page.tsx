@@ -70,13 +70,8 @@ export default async function ProjectPage(
 
   return (
     <main>
-      <section className="relative overflow-hidden border-b border-border">
-        <div
-          aria-hidden
-          className="bg-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black,transparent)]"
-        />
-
-        <Container className="relative py-14 sm:py-20">
+      <section className="border-b border-border">
+        <Container className="py-14 sm:py-20">
           <FadeIn>
             <Link
               href="/#projets"

@@ -11,8 +11,8 @@ export function About() {
       <FadeIn>
         <SectionTitle
           eyebrow="À propos"
-          title="Du Software Engineering à la Data Engineering"
-          subtitle="Une spécialisation progressive, construite sur des bases d'ingénierie logicielle."
+          title="Du développement logiciel au DevOps Engineering"
+          subtitle="Une évolution construite sur quatre ans de développement web et de mises en production."
         />
       </FadeIn>
 
@@ -20,31 +20,31 @@ export function About() {
         <FadeIn className="lg:sticky lg:top-28 lg:self-start">
           <div className="flex flex-col gap-5 text-base leading-relaxed text-muted">
             <p>
-              Je ne suis pas arrivé à la donnée par hasard. J&apos;ai
-              d&apos;abord été développeur : des applications web à concevoir,
-              des bases de données à modéliser, des APIs à maintenir en
-              production. Plusieurs années à écrire du code que d&apos;autres
-              allaient reprendre.
+              J&apos;ai passé quatre ans à développer des applications web :
+              concevoir des bases de données, exposer des APIs, livrer et
+              maintenir du code utilisé au quotidien. Cette expérience m&apos;a
+              appris à raisonner sur le cycle de vie complet d&apos;une
+              application, pas seulement sur la fonctionnalité du jour.
             </p>
             <p>
-              C&apos;est en travaillant sur ces applications que la donnée est
-              devenue le sujet principal. Les questions les plus difficiles ne
-              portaient plus sur l&apos;interface, mais sur ce qui circulait
-              derrière : d&apos;où viennent ces enregistrements, pourquoi ne
-              sont-ils pas cohérents, comment les rendre exploitables de façon
-              fiable et répétable.
+              Ce sont les problèmes rencontrés après la livraison qui m&apos;ont
+              orienté vers le DevOps : des environnements qui diffèrent entre le
+              poste de développement et le serveur, des déploiements manuels
+              fastidieux, et peu de visibilité sur ce qui tourne réellement une
+              fois en production.
             </p>
             <p>
-              Je me suis donc spécialisé : Python, SQL avancé, ETL/ELT,
-              orchestration avec Airflow, traitement distribué avec PySpark,
-              modélisation de Data Warehouses. Une évolution naturelle, parce
-              qu&apos;un pipeline de données reste avant tout un système
-              logiciel : il doit être testable, reproductible et maintenable.
+              Je suis aujourd&apos;hui en formation Expert DevOps. J&apos;y
+              travaille l&apos;administration et l&apos;automatisation des
+              systèmes, la conteneurisation, les pipelines d&apos;intégration et
+              de déploiement continus, l&apos;Infrastructure as Code, le Cloud
+              et l&apos;observabilité. Chaque brique s&apos;accompagne d&apos;un
+              projet pratique, publié sur GitHub au fur et à mesure.
             </p>
             <p className="rounded-card border border-accent/25 bg-accent-soft p-5 text-foreground">
-              Mon avantage n&apos;est pas d&apos;avoir appris la data.
-              C&apos;est de l&apos;aborder avec les réflexes d&apos;un
-              développeur qui a déjà eu du code en production.
+              Je ne viens pas au DevOps depuis l&apos;extérieur. J&apos;ai
+              développé les applications qu&apos;il s&apos;agit maintenant de
+              déployer et d&apos;exploiter.
             </p>
           </div>
         </FadeIn>

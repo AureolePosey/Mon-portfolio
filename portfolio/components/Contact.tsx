@@ -57,7 +57,7 @@ export function Contact() {
           </span>
 
           <h2 className="mt-7 max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-5xl">
-            Let&apos;s build something with data
+            Construisons et déployons des applications fiables
           </h2>
 
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted text-pretty sm:text-lg">

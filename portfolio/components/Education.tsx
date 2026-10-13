@@ -1,4 +1,4 @@
-import { Award, GraduationCap, ExternalLink } from "lucide-react";
+import { Award, ExternalLink, GraduationCap } from "lucide-react";
 
 import { Card } from "@/components/ui/Card";
 import { FadeIn } from "@/components/ui/FadeIn";
@@ -14,8 +14,8 @@ export function Education() {
       <FadeIn>
         <SectionTitle
           eyebrow="Formation"
-          title="Diplômes & certifications"
-          subtitle="Le socle académique en informatique, complété par une spécialisation continue en data."
+          title="Education & Training"
+          subtitle="Un socle académique en informatique, prolongé aujourd'hui par un parcours Expert DevOps."
         />
       </FadeIn>
 
@@ -23,7 +23,7 @@ export function Education() {
         <div>
           <h3 className="mb-6 flex items-center gap-2.5 font-mono text-xs uppercase tracking-[0.18em] text-muted">
             <GraduationCap className="size-4 text-accent" aria-hidden />
-            Diplômes
+            Diplômes et formations
           </h3>
 
           <ul className="flex flex-col gap-4">
@@ -39,6 +39,12 @@ export function Education() {
                         {education.level}
                       </span>
                     </div>
+
+                    {education.targetTitle ? (
+                      <p className="mt-2 text-sm leading-relaxed text-muted">
+                        {education.targetTitle}
+                      </p>
+                    ) : null}
 
                     {education.option ? (
                       <p className="mt-2 text-sm text-muted">
@@ -78,7 +84,7 @@ export function Education() {
         <div>
           <h3 className="mb-6 flex items-center gap-2.5 font-mono text-xs uppercase tracking-[0.18em] text-muted">
             <Award className="size-4 text-accent" aria-hidden />
-            Certifications
+            Certifications obtenues
           </h3>
 
           <ul className="flex flex-col gap-4">

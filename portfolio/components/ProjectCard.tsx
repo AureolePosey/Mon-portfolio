@@ -5,12 +5,18 @@ import { PipelineDiagram } from "@/components/PipelineDiagram";
 import { GitHubIcon } from "@/components/ui/BrandIcons";
 import { Card } from "@/components/ui/Card";
 import { TechBadge } from "@/components/ui/TechBadge";
-import { categoryBadgeClasses, categoryLabels } from "@/lib/categories";
+import {
+  categoryBadgeClasses,
+  categoryLabels,
+  statusBadgeClasses,
+  statusLabels,
+} from "@/lib/categories";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/types";
 
 export function ProjectCard({ project }: { project: Project }) {
   const isFeatured = project.featured;
+  const isCompleted = project.status === "completed";
 
   return (
     <Card
@@ -29,6 +35,15 @@ export function ProjectCard({ project }: { project: Project }) {
             )}
           >
             {categoryLabels[project.category]}
+          </span>
+
+          <span
+            className={cn(
+              "rounded-pill border px-2.5 py-1 font-mono text-[11px] font-medium",
+              statusBadgeClasses[project.status],
+            )}
+          >
+            {statusLabels[project.status]}
           </span>
 
           {isFeatured ? (
@@ -96,6 +111,10 @@ export function ProjectCard({ project }: { project: Project }) {
             >
               <GitHubIcon className="size-4" />
             </a>
+          ) : project.plannedRepository ? (
+            <span className="font-mono text-[11px] text-muted">
+              Dépôt à créer
+            </span>
           ) : null}
         </div>
       </div>
@@ -103,7 +122,7 @@ export function ProjectCard({ project }: { project: Project }) {
       {isFeatured ? (
         <div className="mt-8 shrink-0 rounded-card border border-border bg-background/60 p-6 lg:mt-0 lg:w-[22rem]">
           <p className="mb-5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-            Architecture
+            {isCompleted ? "Architecture" : "Architecture prévue"}
           </p>
           <PipelineDiagram
             stages={project.pipeline.map(({ label }) => ({ label }))}

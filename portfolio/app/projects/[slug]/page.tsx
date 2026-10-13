@@ -3,11 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
-  TriangleAlert,
   ArrowLeft,
   CircleCheckBig,
+  Clock,
   Lightbulb,
+  Rocket,
   Target,
+  TriangleAlert,
+  Wrench,
 } from "lucide-react";
 
 import { PipelineDiagram } from "@/components/PipelineDiagram";
@@ -19,7 +22,12 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { TechBadge } from "@/components/ui/TechBadge";
 import { getProjectBySlug, projects } from "@/data/projects";
 import { site } from "@/data/site";
-import { categoryBadgeClasses, categoryLabels } from "@/lib/categories";
+import {
+  categoryBadgeClasses,
+  categoryLabels,
+  statusBadgeClasses,
+  statusLabels,
+} from "@/lib/categories";
 import { cn } from "@/lib/utils";
 
 export function generateStaticParams() {
@@ -58,6 +66,8 @@ export default async function ProjectPage(
     notFound();
   }
 
+  const isCompleted = project.status === "completed";
+
   return (
     <main>
       <section className="relative overflow-hidden border-b border-border">
@@ -86,6 +96,14 @@ export default async function ProjectPage(
                 )}
               >
                 {categoryLabels[project.category]}
+              </span>
+              <span
+                className={cn(
+                  "rounded-pill border px-2.5 py-1 font-mono text-[11px] font-medium",
+                  statusBadgeClasses[project.status],
+                )}
+              >
+                {statusLabels[project.status]}
               </span>
               {project.period ? (
                 <span className="font-mono text-[11px] text-muted">
@@ -120,8 +138,8 @@ export default async function ProjectPage(
             </ul>
           </FadeIn>
 
-          {project.github || project.demo ? (
-            <FadeIn delay={0.24} className="mt-9">
+          <FadeIn delay={0.24} className="mt-9">
+            {project.github || project.demo ? (
               <div className="flex flex-wrap gap-3">
                 {project.github ? (
                   <Button href={project.github}>
@@ -135,8 +153,16 @@ export default async function ProjectPage(
                   </Button>
                 ) : null}
               </div>
-            </FadeIn>
-          ) : null}
+            ) : project.plannedRepository ? (
+              <p className="inline-flex flex-wrap items-center gap-2 rounded-card border border-border bg-surface px-4 py-3 text-sm text-muted">
+                <GitHubIcon className="size-4" />
+                Dépôt prévu :
+                <span className="font-mono text-foreground">
+                  {project.plannedRepository}
+                </span>
+              </p>
+            ) : null}
+          </FadeIn>
         </Container>
       </section>
 
@@ -164,17 +190,67 @@ export default async function ProjectPage(
               </Card>
             </FadeIn>
 
-            <FadeIn>
-              <Card className="border-accent/25 bg-accent-soft p-6 sm:p-7">
-                <h2 className="flex items-center gap-2.5 text-lg font-semibold tracking-tight">
-                  <Lightbulb className="size-[18px] text-accent" aria-hidden />
-                  Solution
+            {project.objectives && project.objectives.length > 0 ? (
+              <FadeIn>
+                <h2 className="flex items-center gap-2.5 text-xl font-semibold tracking-tight">
+                  <Rocket className="size-5 text-accent" aria-hidden />
+                  Objectifs techniques
                 </h2>
-                <p className="mt-4 text-base leading-relaxed text-muted text-pretty">
-                  {project.solution}
-                </p>
-              </Card>
-            </FadeIn>
+                <ul className="mt-6 flex flex-col gap-3">
+                  {project.objectives.map((objective) => (
+                    <li
+                      key={objective}
+                      className="flex gap-3 text-sm leading-relaxed text-muted"
+                    >
+                      <span
+                        aria-hidden
+                        className="mt-[7px] size-1.5 shrink-0 rounded-full bg-accent"
+                      />
+                      {objective}
+                    </li>
+                  ))}
+                </ul>
+              </FadeIn>
+            ) : null}
+
+            {project.solution ? (
+              <FadeIn>
+                <Card className="border-accent/25 bg-accent-soft p-6 sm:p-7">
+                  <h2 className="flex items-center gap-2.5 text-lg font-semibold tracking-tight">
+                    <Lightbulb
+                      className="size-[18px] text-accent"
+                      aria-hidden
+                    />
+                    Solution
+                  </h2>
+                  <p className="mt-4 text-base leading-relaxed text-muted text-pretty">
+                    {project.solution}
+                  </p>
+                </Card>
+              </FadeIn>
+            ) : null}
+
+            {project.roadmap && project.roadmap.length > 0 ? (
+              <FadeIn>
+                <h2 className="flex items-center gap-2.5 text-xl font-semibold tracking-tight">
+                  <Clock className="size-5 text-accent" aria-hidden />
+                  Étapes de réalisation
+                </h2>
+                <ol className="mt-6 flex flex-col gap-3">
+                  {project.roadmap.map((step, index) => (
+                    <li
+                      key={step}
+                      className="flex gap-4 text-sm leading-relaxed text-muted"
+                    >
+                      <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-lg border border-border bg-surface font-mono text-[11px] text-accent">
+                        {index + 1}
+                      </span>
+                      {step}
+                    </li>
+                  ))}
+                </ol>
+              </FadeIn>
+            ) : null}
 
             {project.screenshots.length > 0 ? (
               <FadeIn>
@@ -206,54 +282,104 @@ export default async function ProjectPage(
               </FadeIn>
             ) : null}
 
-            <FadeIn>
-              <h2 className="flex items-center gap-2.5 text-xl font-semibold tracking-tight">
-                <TriangleAlert className="size-5 text-accent" aria-hidden />
-                Difficultés rencontrées
-              </h2>
-              <ul className="mt-6 flex flex-col gap-4">
-                {project.challenges.map((challenge) => (
-                  <li
-                    key={challenge}
-                    className="flex gap-4 rounded-card border border-border bg-surface p-5 text-sm leading-relaxed text-muted"
-                  >
-                    <span
-                      aria-hidden
-                      className="mt-[7px] size-1.5 shrink-0 rounded-full bg-accent"
-                    />
-                    {challenge}
-                  </li>
-                ))}
-              </ul>
-            </FadeIn>
+            {project.challenges && project.challenges.length > 0 ? (
+              <FadeIn>
+                <h2 className="flex items-center gap-2.5 text-xl font-semibold tracking-tight">
+                  <TriangleAlert className="size-5 text-accent" aria-hidden />
+                  Difficultés rencontrées
+                </h2>
+                <ul className="mt-6 flex flex-col gap-4">
+                  {project.challenges.map((challenge) => (
+                    <li
+                      key={challenge}
+                      className="flex gap-4 rounded-card border border-border bg-surface p-5 text-sm leading-relaxed text-muted"
+                    >
+                      <span
+                        aria-hidden
+                        className="mt-[7px] size-1.5 shrink-0 rounded-full bg-accent"
+                      />
+                      {challenge}
+                    </li>
+                  ))}
+                </ul>
+              </FadeIn>
+            ) : null}
 
-            <FadeIn>
-              <h2 className="flex items-center gap-2.5 text-xl font-semibold tracking-tight">
-                <CircleCheckBig className="size-5 text-accent" aria-hidden />
-                Résultats
-              </h2>
-              <ul className="mt-6 flex flex-col gap-3">
-                {project.results.map((result) => (
-                  <li
-                    key={result}
-                    className="flex gap-3 text-sm leading-relaxed text-muted"
-                  >
-                    <CircleCheckBig
-                      className="mt-0.5 size-4 shrink-0 text-accent"
-                      aria-hidden
-                    />
-                    {result}
-                  </li>
-                ))}
-              </ul>
-            </FadeIn>
+            {project.results && project.results.length > 0 ? (
+              <FadeIn>
+                <h2 className="flex items-center gap-2.5 text-xl font-semibold tracking-tight">
+                  <CircleCheckBig className="size-5 text-accent" aria-hidden />
+                  Résultats
+                </h2>
+                <ul className="mt-6 flex flex-col gap-3">
+                  {project.results.map((result) => (
+                    <li
+                      key={result}
+                      className="flex gap-3 text-sm leading-relaxed text-muted"
+                    >
+                      <CircleCheckBig
+                        className="mt-0.5 size-4 shrink-0 text-accent"
+                        aria-hidden
+                      />
+                      {result}
+                    </li>
+                  ))}
+                </ul>
+              </FadeIn>
+            ) : null}
+
+            {project.limitations && project.limitations.length > 0 ? (
+              <FadeIn>
+                <h2 className="flex items-center gap-2.5 text-xl font-semibold tracking-tight">
+                  <TriangleAlert className="size-5 text-accent" aria-hidden />
+                  Limites connues
+                </h2>
+                <ul className="mt-6 flex flex-col gap-3">
+                  {project.limitations.map((limitation) => (
+                    <li
+                      key={limitation}
+                      className="flex gap-3 text-sm leading-relaxed text-muted"
+                    >
+                      <span
+                        aria-hidden
+                        className="mt-[7px] size-1.5 shrink-0 rounded-full bg-muted"
+                      />
+                      {limitation}
+                    </li>
+                  ))}
+                </ul>
+              </FadeIn>
+            ) : null}
+
+            {project.improvements && project.improvements.length > 0 ? (
+              <FadeIn>
+                <h2 className="flex items-center gap-2.5 text-xl font-semibold tracking-tight">
+                  <Wrench className="size-5 text-accent" aria-hidden />
+                  Pistes d&apos;amélioration
+                </h2>
+                <ul className="mt-6 flex flex-col gap-3">
+                  {project.improvements.map((improvement) => (
+                    <li
+                      key={improvement}
+                      className="flex gap-3 text-sm leading-relaxed text-muted"
+                    >
+                      <span
+                        aria-hidden
+                        className="mt-[7px] size-1.5 shrink-0 rounded-full bg-accent"
+                      />
+                      {improvement}
+                    </li>
+                  ))}
+                </ul>
+              </FadeIn>
+            ) : null}
           </div>
 
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <FadeIn>
               <Card className="p-6">
                 <h2 className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-                  Architecture & pipeline
+                  {isCompleted ? "Architecture" : "Architecture prévue"}
                 </h2>
                 <div className="mt-6">
                   <PipelineDiagram stages={project.pipeline} />

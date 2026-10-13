@@ -33,7 +33,7 @@ export function ArchitectureTabs() {
     <div>
       <div
         role="tablist"
-        aria-label="Architectures de données"
+        aria-label="Architectures DevOps"
         className="flex flex-wrap gap-2"
       >
         {architectures.map((architecture, index) => {
@@ -72,9 +72,16 @@ export function ArchitectureTabs() {
       >
         <Card className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1fr_1fr] lg:gap-12">
           <div>
-            <h3 className="text-xl font-semibold tracking-tight">
-              {active.title}
-            </h3>
+            <div className="flex flex-wrap items-center gap-3">
+              <h3 className="text-xl font-semibold tracking-tight">
+                {active.title}
+              </h3>
+              {active.planned ? (
+                <span className="rounded-pill border border-border-strong bg-surface-hover px-2.5 py-1 font-mono text-[11px] font-medium text-muted">
+                  Architecture prévue
+                </span>
+              ) : null}
+            </div>
             <p className="mt-3 text-sm leading-relaxed text-muted">
               {active.description}
             </p>
@@ -83,7 +90,7 @@ export function ArchitectureTabs() {
               <Lightbulb className="size-4 shrink-0 text-accent" aria-hidden />
               <p className="text-sm leading-relaxed text-muted">
                 <span className="font-medium text-foreground">
-                  Quand l&apos;utiliser :{" "}
+                  Ce que ça résout :{" "}
                 </span>
                 {active.useCase}
               </p>
@@ -92,7 +99,7 @@ export function ArchitectureTabs() {
 
           <div className="rounded-card border border-border bg-background/60 p-6">
             <p className="mb-5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-              Flux de données
+              Flux
             </p>
             <PipelineDiagram stages={active.stages} />
           </div>

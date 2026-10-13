@@ -23,7 +23,7 @@ export function Footer() {
           <div className="text-center sm:text-left">
             <p className="text-sm text-muted">© 2026 {site.name}</p>
             <p className="mt-1 text-xs text-muted">
-              Built with Next.js &amp; passion for data.
+              Construit avec Next.js, déployé sur Vercel.
             </p>
           </div>
 

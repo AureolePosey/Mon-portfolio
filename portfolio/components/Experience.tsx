@@ -1,4 +1,4 @@
-import { Building2, GraduationCap, Workflow } from "lucide-react";
+import { Building2, GraduationCap, Terminal, Workflow } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { Card } from "@/components/ui/Card";
@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import type { ExperienceKind } from "@/types";
 
 const kindIcons: Record<ExperienceKind, LucideIcon> = {
+  devops: Terminal,
   data: Workflow,
   software: Building2,
   teaching: GraduationCap,
@@ -22,8 +23,8 @@ export function Experience() {
       <FadeIn>
         <SectionTitle
           eyebrow="Parcours"
-          title="Expérience professionnelle"
-          subtitle="Du développement d'applications en production à la construction de pipelines de données."
+          title="Expérience et formation"
+          subtitle="Quatre ans de développement web en entreprise, un parcours d'enseignement, et aujourd'hui une formation Expert DevOps."
         />
       </FadeIn>
 
@@ -31,7 +32,7 @@ export function Experience() {
         {experiences.map((experience, index) => {
           const KindIcon = kindIcons[experience.kind];
           const isLast = index === experiences.length - 1;
-          const isData = experience.kind === "data";
+          const isHighlighted = experience.kind === "devops";
 
           return (
             <li key={experience.id} className="relative pl-14 sm:pl-16">
@@ -46,7 +47,7 @@ export function Experience() {
                 aria-hidden
                 className={cn(
                   "absolute left-0 top-1 inline-flex size-10 items-center justify-center rounded-xl border sm:size-12",
-                  isData
+                  isHighlighted
                     ? "border-accent/30 bg-accent-soft text-accent"
                     : "border-border bg-surface text-muted",
                 )}
@@ -104,7 +105,7 @@ export function Experience() {
                         <TechBadge
                           label={technology}
                           size="sm"
-                          variant={isData ? "accent" : "default"}
+                          variant={isHighlighted ? "accent" : "default"}
                         />
                       </li>
                     ))}

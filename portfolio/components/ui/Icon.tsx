@@ -2,6 +2,7 @@ import {
   ChartColumnBig,
   Cloud,
   CodeXml,
+  Container,
   Database,
   Server,
   Terminal,
@@ -18,6 +19,7 @@ const icons: Record<IconName, LucideIcon> = {
   chart: ChartColumnBig,
   server: Server,
   terminal: Terminal,
+  container: Container,
 };
 
 export function Icon({

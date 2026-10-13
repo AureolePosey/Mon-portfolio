@@ -9,8 +9,8 @@ export function Architectures() {
       <FadeIn>
         <SectionTitle
           eyebrow="Architectures"
-          title="Data Architectures"
-          subtitle="Les trois schémas que j'utilise selon le contexte, et surtout le critère qui fait choisir l'un plutôt que l'autre."
+          title="Schémas de référence"
+          subtitle="Les quatre architectures qui structurent mes projets DevOps, et ce que chacune résout concrètement."
         />
       </FadeIn>
 

@@ -9,9 +9,9 @@ import { site } from "@/data/site";
 const RING_LENGTH = 1599;
 
 const chips = [
-  { label: "Extract", className: "-left-2 top-[7%]", delay: 0 },
-  { label: "Transform", className: "-right-2 top-[45%]", delay: 0.6 },
-  { label: "Load", className: "-left-2 bottom-[11%]", delay: 1.2 },
+  { label: "Build", className: "-left-2 top-[7%]", delay: 0 },
+  { label: "Ship", className: "-right-2 top-[45%]", delay: 0.6 },
+  { label: "Run", className: "-left-2 bottom-[11%]", delay: 1.2 },
 ];
 
 export function HeroVisual() {

@@ -48,15 +48,12 @@ export function Hero() {
             </FadeIn>
 
             <FadeIn delay={0.16} className="mt-4">
-              <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <p className="flex flex-col gap-1">
                 <span className="text-2xl font-semibold tracking-tight text-gradient sm:text-3xl">
-                  {site.role}
+                  {site.heroRole}
                 </span>
-                <span aria-hidden className="text-muted">
-                  /
-                </span>
-                <span className="text-lg font-medium text-muted sm:text-xl">
-                  {site.secondaryRole}
+                <span className="text-base font-medium text-muted sm:text-lg">
+                  Expert DevOps · {site.secondaryRole}
                 </span>
               </p>
             </FadeIn>
@@ -75,6 +72,7 @@ export function Hero() {
                   </li>
                 ))}
               </ul>
+              <p className="mt-3 text-xs text-muted">{site.heroStackNote}</p>
             </FadeIn>
 
             <FadeIn delay={0.4} className="mt-9">

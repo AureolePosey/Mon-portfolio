@@ -4,10 +4,243 @@ const GITHUB = "https://github.com/AureolePosey";
 
 export const projects: Project[] = [
   {
+    slug: "linux-server-automation",
+    title: "Linux Server Automation",
+    category: "systems-automation",
+    status: "planned",
+    featured: false,
+    tagline:
+      "Provisionnement et durcissement d'un serveur Ubuntu pilotés par des scripts Bash.",
+    description:
+      "Projet d'automatisation de la mise en service d'un serveur Ubuntu : installation des paquets, configuration des services, règles de pare-feu, accès SSH et tâches planifiées. L'objectif est de remplacer une suite de commandes tapées à la main par des scripts rejouables et documentés.",
+    problem:
+      "Configurer un serveur à la main ne laisse aucune trace de ce qui a été fait. Au deuxième serveur, les réglages diffèrent déjà, et plus rien ne garantit qu'un redéploiement donnera le même résultat.",
+    objectives: [
+      "Automatiser l'installation et la configuration des services de base",
+      "Appliquer des règles de pare-feu et un accès SSH restreint",
+      "Planifier les mises à jour et les tâches récurrentes avec cron",
+      "Journaliser chaque exécution pour pouvoir vérifier ce qui a été appliqué",
+      "Documenter les choix de configuration et leurs conséquences",
+    ],
+    pipeline: [
+      { label: "Administrateur", detail: "Lance le script de provisionnement" },
+      { label: "Scripts Bash", detail: "Installation et configuration" },
+      { label: "Serveur Ubuntu", detail: "Paquets, utilisateurs, services" },
+      { label: "SSH / UFW / Nginx", detail: "Accès, pare-feu, serveur web" },
+      { label: "Journalisation", detail: "Traces et vérifications" },
+    ],
+    technologies: ["Linux", "Ubuntu", "Bash", "SSH", "UFW", "Nginx", "cron"],
+    roadmap: [
+      "Créer le dépôt et la structure des scripts",
+      "Script d'installation des paquets et de création des utilisateurs",
+      "Configuration SSH et règles UFW",
+      "Installation et configuration de Nginx",
+      "Tâches cron de mise à jour et de sauvegarde",
+      "Tests sur une machine virtuelle neuve, puis documentation",
+    ],
+    screenshots: [],
+    plannedRepository: "linux-server-automation",
+  },
+  {
+    slug: "fullstack-app-docker",
+    title: "Full Stack App Containerization",
+    category: "containerization",
+    status: "planned",
+    featured: false,
+    tagline:
+      "Conteneurisation d'une application web multi-services avec Docker et Docker Compose.",
+    description:
+      "Projet de mise en conteneurs d'une application web complète : interface, API et base de données, derrière un reverse proxy Nginx. Chaque service est isolé, et l'ensemble démarre avec une seule commande.",
+    problem:
+      "Une application qui fonctionne sur un poste ne fonctionne pas forcément sur un autre : versions différentes, dépendances manquantes, configuration locale. Conteneuriser revient à livrer l'environnement avec le code.",
+    objectives: [
+      "Écrire des images Docker propres, avec des builds multi-stage là où c'est utile",
+      "Séparer les services et définir les réseaux entre eux",
+      "Gérer la persistance des données avec des volumes",
+      "Externaliser la configuration dans des variables d'environnement",
+      "Ne jamais versionner de secrets dans le dépôt",
+      "Documenter le démarrage et l'arrêt de la pile",
+    ],
+    pipeline: [
+      { label: "Client Web", detail: "Navigateur" },
+      { label: "Nginx", detail: "Reverse proxy" },
+      { label: "Frontend", detail: "Interface conteneurisée" },
+      { label: "API Backend", detail: "Service applicatif conteneurisé" },
+      { label: "Base de données", detail: "PostgreSQL ou MySQL avec volume" },
+    ],
+    technologies: [
+      "Docker",
+      "Docker Compose",
+      "Nginx",
+      "PostgreSQL",
+      "Variables d'environnement",
+    ],
+    roadmap: [
+      "Choisir l'application à conteneuriser",
+      "Écrire le Dockerfile de l'API, puis celui du frontend",
+      "Composer les services, réseaux et volumes",
+      "Configurer le reverse proxy Nginx",
+      "Externaliser la configuration et vérifier qu'aucun secret ne traîne",
+      "Documenter la procédure de démarrage",
+    ],
+    screenshots: [],
+    plannedRepository: "fullstack-app-docker",
+  },
+  {
+    slug: "cicd-pipeline-devsecops",
+    title: "CI/CD Pipeline with Security Scanning",
+    category: "cicd",
+    status: "planned",
+    featured: false,
+    tagline:
+      "Pipeline GitHub Actions qui teste, analyse les vulnérabilités, construit et publie une image.",
+    description:
+      "Projet de chaîne d'intégration et de livraison continues : à chaque push, les tests s'exécutent, l'image est analysée par Trivy, puis construite et publiée sur GitHub Container Registry si les conditions sont réunies.",
+    problem:
+      "Tester et publier manuellement est long et irrégulier. Sans contrôle automatisé, une dépendance vulnérable peut se retrouver en production sans que personne ne l'ait vue passer.",
+    objectives: [
+      "Déclencher le workflow automatiquement à chaque push",
+      "Exécuter les tests avant toute construction d'image",
+      "Analyser les vulnérabilités avec Trivy",
+      "Définir un seuil de blocage adapté à la gravité des failles",
+      "Publier l'image uniquement quand toutes les étapes passent",
+      "Gérer les secrets et limiter les permissions du workflow au minimum",
+    ],
+    pipeline: [
+      { label: "Git Push", detail: "Déclenche le workflow" },
+      { label: "GitHub Actions", detail: "Exécution du pipeline" },
+      { label: "Tests", detail: "Vérifications automatisées" },
+      { label: "Trivy", detail: "Analyse des vulnérabilités" },
+      { label: "Docker Build", detail: "Construction de l'image" },
+      { label: "GHCR", detail: "Publication de l'image" },
+    ],
+    technologies: [
+      "GitHub Actions",
+      "Docker",
+      "Trivy",
+      "GitHub Container Registry",
+      "YAML",
+    ],
+    roadmap: [
+      "Écrire le workflow de base et le déclencheur",
+      "Ajouter l'étape de tests",
+      "Intégrer Trivy et définir les règles de blocage",
+      "Construire l'image et la pousser sur GHCR",
+      "Restreindre les permissions du token et gérer les secrets",
+      "Documenter le fonctionnement du pipeline",
+    ],
+    screenshots: [],
+    plannedRepository: "cicd-pipeline-devsecops",
+  },
+  {
+    slug: "azure-terraform-infra",
+    title: "Azure Infrastructure as Code",
+    category: "cloud-iac",
+    status: "planned",
+    featured: false,
+    tagline:
+      "Infrastructure Azure décrite avec Terraform, puis configurée avec Ansible.",
+    description:
+      "Projet de déploiement reproductible d'une infrastructure Azure : réseau virtuel, machine virtuelle et stockage décrits en Terraform, puis configuration des machines automatisée avec Ansible.",
+    problem:
+      "Une infrastructure créée à la main dans une console Cloud n'est ni traçable ni reproductible. Décrire cette infrastructure dans du code versionné permet de la recréer à l'identique et de la détruire proprement.",
+    objectives: [
+      "Versionner la description de l'infrastructure",
+      "Utiliser des variables et des outputs plutôt que des valeurs figées",
+      "Gérer l'état Terraform de manière fiable",
+      "Automatiser la configuration des machines avec Ansible",
+      "Ne publier aucun secret ni identifiant dans le dépôt",
+      "Documenter les commandes de planification, de création et de destruction",
+    ],
+    pipeline: [
+      { label: "Code Terraform", detail: "Description des ressources" },
+      { label: "Provisionnement", detail: "Plan puis application sur Azure" },
+      { label: "Réseau", detail: "Virtual Network et règles d'accès" },
+      { label: "Machine virtuelle", detail: "Calcul et stockage associés" },
+      { label: "Ansible", detail: "Configuration et installation" },
+      { label: "Vérifications", detail: "Contrôle de l'état obtenu" },
+    ],
+    technologies: [
+      "Terraform",
+      "Microsoft Azure",
+      "Azure Virtual Network",
+      "Azure Virtual Machines",
+      "Azure Storage",
+      "Ansible",
+    ],
+    roadmap: [
+      "Définir le périmètre minimal de l'infrastructure",
+      "Écrire les ressources réseau en Terraform",
+      "Ajouter la machine virtuelle et le stockage",
+      "Écrire les playbooks Ansible de configuration",
+      "Tester le cycle création puis destruction complet",
+      "Documenter le coût des ressources et la procédure de nettoyage",
+    ],
+    limitations: [
+      "Les ressources Cloud sont facturées : l'environnement sera créé pour les tests puis détruit systématiquement.",
+    ],
+    screenshots: [],
+    plannedRepository: "azure-terraform-infra",
+  },
+  {
+    slug: "data-platform-k8s-gitops",
+    title: "Data Platform on Kubernetes (GitOps)",
+    category: "platform-engineering",
+    status: "planned",
+    featured: true,
+    tagline:
+      "Plateforme de traitement de données déployée sur Kubernetes, pilotée en GitOps et supervisée.",
+    description:
+      "Projet qui relie mes trois domaines : un pipeline de données conteneurisé, déployé sur Kubernetes, livré par une approche GitOps avec Argo CD, et supervisé par Prometheus et Grafana. C'est l'objectif à long terme de mon parcours, pas une plateforme déjà en service.",
+    problem:
+      "Un pipeline de données qui tourne sur une seule machine ne résiste ni à la montée en charge ni à une panne. L'industrialiser demande de l'orchestration, un déploiement traçable et des métriques pour savoir ce qui se passe réellement.",
+    objectives: [
+      "Déployer un traitement de données conteneurisé sur Kubernetes",
+      "Versionner les manifests et les charts Helm",
+      "Mettre en place un déploiement GitOps avec Argo CD",
+      "Exposer des métriques utiles et construire des dashboards",
+      "Documenter la configuration et le fonctionnement de la plateforme",
+    ],
+    pipeline: [
+      { label: "Sources de données", detail: "Fichiers ou flux en entrée" },
+      { label: "Traitement", detail: "Pipeline conteneurisé" },
+      { label: "GitHub Actions", detail: "Build et publication des images" },
+      { label: "Registry", detail: "Images versionnées" },
+      { label: "Helm / Git", detail: "État souhaité du cluster" },
+      { label: "Argo CD", detail: "Synchronisation GitOps" },
+      { label: "Kubernetes", detail: "Exécution des charges de travail" },
+      { label: "Prometheus / Grafana", detail: "Métriques et dashboards" },
+    ],
+    technologies: [
+      "Kubernetes",
+      "k3s",
+      "Helm",
+      "Argo CD",
+      "Prometheus",
+      "Grafana",
+      "Terraform",
+      "GitHub Actions",
+    ],
+    roadmap: [
+      "Monter un cluster local avec k3s pour éviter tout coût",
+      "Déployer une première application conteneurisée",
+      "Écrire les charts Helm et versionner les manifests",
+      "Installer Argo CD et basculer le déploiement en GitOps",
+      "Brancher Prometheus et construire les premiers dashboards",
+      "Y faire tourner un pipeline de données complet",
+    ],
+    limitations: [
+      "La première version tournera sur un cluster local k3s. Un déploiement sur AKS ne sera envisagé que si le besoin le justifie, pour éviter des coûts Cloud inutiles.",
+    ],
+    screenshots: [],
+    plannedRepository: "data-platform-k8s-gitops",
+  },
+  {
     slug: "healthcare-data-platform",
     title: "Healthcare Data Platform",
     category: "data-engineering",
-    featured: true,
+    status: "completed",
+    featured: false,
     period: "2026",
     tagline:
       "Plateforme de bout en bout transformant cinq sources hospitalières en Data Warehouse analytique, orchestrée par Airflow.",
@@ -20,8 +253,7 @@ export const projects: Project[] = [
     pipeline: [
       {
         label: "Ingestion",
-        detail:
-          "Lecture des 5 CSV avec schémas explicites, écriture en Parquet",
+        detail: "Lecture des 5 CSV avec schémas explicites, écriture en Parquet",
       },
       {
         label: "Cleaning",
@@ -29,8 +261,7 @@ export const projects: Project[] = [
       },
       {
         label: "Quality Gates",
-        detail:
-          "Contrôles bloquants : volume, taux de rejet, unicité, NOT NULL",
+        detail: "Contrôles bloquants : volume, taux de rejet, unicité, NOT NULL",
       },
       {
         label: "Transformation",
@@ -71,65 +302,12 @@ export const projects: Project[] = [
     ],
     screenshots: [],
     github: `${GITHUB}/healthcare-data-platform`,
-    demo: undefined,
   },
-
-  {
-    slug: "real-estate-data-warehouse",
-    title: "Real Estate Data Warehouse",
-    category: "data-engineering",
-    featured: false,
-    period: "2026",
-    tagline:
-      "Données immobilières brutes converties en Data Warehouse en étoile avec PySpark.",
-    description:
-      "Pipeline PySpark transformant des fichiers immobiliers bruts en un Data Warehouse prêt pour l'analyse. Le modèle en étoile permet aux analystes d'identifier les villes rentables, de suivre l'évolution des prix et de comparer les types de biens sans écrire de jointures complexes.",
-    problem:
-      "Les fichiers CSV immobiliers sont incohérents, lents à interroger et inadaptés à l'analyse. En l'état, répondre à une question aussi simple que « quelles sont les villes les plus chères » demande de retraiter les données à chaque fois, avec le risque d'obtenir un résultat différent selon la personne qui écrit la requête.",
-    solution:
-      "J'ai découpé le traitement en cinq étapes, du chargement brut jusqu'à la couche analytique. Le nettoyage traite les valeurs manquantes et les doublons, la transformation ajoute les variables dérivées et l'enrichissement temporel, puis les données sont modélisées en schéma en étoile. Les requêtes analytiques sont volontairement découplées du pipeline : la logique métier vit dans des fichiers SQL, l'ingénierie dans les modules Python. Le stockage en Parquet accélère nettement la relecture.",
-    pipeline: [
-      { label: "Ingestion", detail: "Chargement des CSV bruts dans Spark" },
-      { label: "Cleaning", detail: "Valeurs manquantes et doublons" },
-      {
-        label: "Transformation",
-        detail: "Feature engineering et enrichissement temporel",
-      },
-      {
-        label: "Data Modeling",
-        detail: "Schéma en étoile : faits et dimensions",
-      },
-      { label: "Analytics", detail: "Requêtes SQL découplées du pipeline" },
-    ],
-    technologies: [
-      "Python",
-      "PySpark",
-      "Apache Spark",
-      "Spark SQL",
-      "Parquet",
-      "Data Modeling",
-      "SQL",
-    ],
-    challenges: [
-      "Séparer strictement l'ingénierie de la logique métier : les modules Python ne contiennent aucune règle d'analyse, celle-ci reste dans les fichiers SQL et peut évoluer sans toucher au pipeline.",
-      "Concevoir le modèle pour tenir la charge sur des jeux de données de plus de 2 millions de lignes, et non seulement sur l'échantillon de développement.",
-      "Optimiser le stockage en Parquet pour que les requêtes analytiques restent rapides à la relecture.",
-    ],
-    results: [
-      "Classement des 10 villes les plus chères, avec des moyennes atteignant 50,1 M$ sur les villes du Kansas",
-      "Segmentation du prix au pied carré selon la taille du bien : 387,92 $ pour les petites surfaces contre 317,80 $ pour les grandes",
-      "Modèle en étoile conçu pour passer à l'échelle sur plus de 2 millions de lignes",
-      "Requêtes analytiques exécutables en SQL standard, sans jointure complexe",
-    ],
-    screenshots: [],
-    github: `${GITHUB}/real-estate-data-warehouse`,
-    demo: undefined,
-  },
-
   {
     slug: "mobile-money-fraud-detection",
     title: "Mobile Money Fraud Detection",
     category: "data-engineering",
+    status: "completed",
     featured: false,
     period: "2026",
     tagline:
@@ -137,7 +315,7 @@ export const projects: Project[] = [
     description:
       "Pipeline de bout en bout détectant les transactions frauduleuses sur un jeu de données Mobile Money de plus d'un million d'enregistrements. L'architecture médaillon en six étapes combine contrôles qualité, ingénierie de variables comportementales et règles métier de détection, avec un reporting final par ville et par opérateur.",
     problem:
-      "Sur un volume d'un million de transactions, la fraude ne se repère pas à l'œil ni par un simple seuil sur le montant. Un comportement frauduleux se définit par rapport aux habitudes de l'utilisateur : c'est l'écart à sa propre moyenne qui compte, pas la valeur absolue. Il fallait donc reconstruire l'historique comportemental de chaque compte avant de pouvoir qualifier quoi que ce soit.",
+      "Sur un volume d'un million de transactions, la fraude ne se repère ni à l'œil ni par un simple seuil sur le montant. Un comportement frauduleux se définit par rapport aux habitudes de l'utilisateur : c'est l'écart à sa propre moyenne qui compte, pas la valeur absolue. Il fallait donc reconstruire l'historique comportemental de chaque compte avant de pouvoir qualifier quoi que ce soit.",
     solution:
       "J'ai construit une couche de feature engineering qui calcule, par utilisateur, des moyennes glissantes et une fréquence de transaction quotidienne à l'aide de Window Functions Spark. La détection s'appuie ensuite sur deux familles de règles : des seuils critiques absolus et des anomalies relatives au comportement habituel du compte. Les données sont stockées en Parquet partitionné par date, ce qui restreint la lecture aux seules partitions utiles. Le pipeline est idempotent : le relancer ne duplique rien.",
     pipeline: [
@@ -185,13 +363,63 @@ export const projects: Project[] = [
     ],
     screenshots: [],
     github: `${GITHUB}/mobile-money-transactions-fraud-detection-pyspark`,
-    demo: undefined,
   },
-
+  {
+    slug: "real-estate-data-warehouse",
+    title: "Real Estate Data Warehouse",
+    category: "data-engineering",
+    status: "completed",
+    featured: false,
+    period: "2026",
+    tagline:
+      "Données immobilières brutes converties en Data Warehouse en étoile avec PySpark.",
+    description:
+      "Pipeline PySpark transformant des fichiers immobiliers bruts en un Data Warehouse prêt pour l'analyse. Le modèle en étoile permet aux analystes d'identifier les villes rentables, de suivre l'évolution des prix et de comparer les types de biens sans écrire de jointures complexes.",
+    problem:
+      "Les fichiers CSV immobiliers sont incohérents, lents à interroger et inadaptés à l'analyse. En l'état, répondre à une question aussi simple que « quelles sont les villes les plus chères » demande de retraiter les données à chaque fois, avec le risque d'obtenir un résultat différent selon la personne qui écrit la requête.",
+    solution:
+      "J'ai découpé le traitement en cinq étapes, du chargement brut jusqu'à la couche analytique. Le nettoyage traite les valeurs manquantes et les doublons, la transformation ajoute les variables dérivées et l'enrichissement temporel, puis les données sont modélisées en schéma en étoile. Les requêtes analytiques sont volontairement découplées du pipeline : la logique métier vit dans des fichiers SQL, l'ingénierie dans les modules Python. Le stockage en Parquet accélère nettement la relecture.",
+    pipeline: [
+      { label: "Ingestion", detail: "Chargement des CSV bruts dans Spark" },
+      { label: "Cleaning", detail: "Valeurs manquantes et doublons" },
+      {
+        label: "Transformation",
+        detail: "Feature engineering et enrichissement temporel",
+      },
+      {
+        label: "Data Modeling",
+        detail: "Schéma en étoile : faits et dimensions",
+      },
+      { label: "Analytics", detail: "Requêtes SQL découplées du pipeline" },
+    ],
+    technologies: [
+      "Python",
+      "PySpark",
+      "Apache Spark",
+      "Spark SQL",
+      "Parquet",
+      "Data Modeling",
+      "SQL",
+    ],
+    challenges: [
+      "Séparer strictement l'ingénierie de la logique métier : les modules Python ne contiennent aucune règle d'analyse, celle-ci reste dans les fichiers SQL et peut évoluer sans toucher au pipeline.",
+      "Concevoir le modèle pour tenir la charge sur des jeux de données de plus de 2 millions de lignes, et non seulement sur l'échantillon de développement.",
+      "Optimiser le stockage en Parquet pour que les requêtes analytiques restent rapides à la relecture.",
+    ],
+    results: [
+      "Classement des 10 villes les plus chères, avec des moyennes atteignant 50,1 M$ sur les villes du Kansas",
+      "Segmentation du prix au pied carré selon la taille du bien : 387,92 $ pour les petites surfaces contre 317,80 $ pour les grandes",
+      "Modèle en étoile conçu pour passer à l'échelle sur plus de 2 millions de lignes",
+      "Requêtes analytiques exécutables en SQL standard, sans jointure complexe",
+    ],
+    screenshots: [],
+    github: `${GITHUB}/real-estate-data-warehouse`,
+  },
   {
     slug: "benin-mobile-money-pipeline",
     title: "Benin Mobile Money Pipeline",
     category: "data-engineering",
+    status: "completed",
     featured: false,
     period: "2026",
     tagline:
@@ -239,13 +467,12 @@ export const projects: Project[] = [
     ],
     screenshots: [],
     github: `${GITHUB}/benin-mobile-money-pipeline`,
-    demo: undefined,
   },
-
   {
     slug: "benin-macroeconomic-analysis",
     title: "Benin Macroeconomic Analysis",
     category: "data-analytics",
+    status: "completed",
     featured: false,
     period: "Données 2016 à 2024",
     tagline:
@@ -294,10 +521,21 @@ export const projects: Project[] = [
     ],
     screenshots: [],
     github: `${GITHUB}/benin-macroeconomic-analysis`,
-    demo: undefined,
   },
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((project) => project.slug === slug);
 }
+
+export const devopsProjects = projects.filter(
+  (project) =>
+    project.category !== "data-engineering" &&
+    project.category !== "data-analytics",
+);
+
+export const dataProjects = projects.filter(
+  (project) =>
+    project.category === "data-engineering" ||
+    project.category === "data-analytics",
+);

@@ -1,8 +1,24 @@
 export type IconName =
-  "database" | "workflow" | "cloud" | "code" | "chart" | "server" | "terminal";
+  | "database"
+  | "workflow"
+  | "cloud"
+  | "code"
+  | "chart"
+  | "server"
+  | "terminal"
+  | "container";
 
 export type ProjectCategory =
-  "data-engineering" | "data-analytics" | "software-development";
+  | "systems-automation"
+  | "containerization"
+  | "cicd"
+  | "cloud-iac"
+  | "platform-engineering"
+  | "data-engineering"
+  | "data-analytics"
+  | "software-development";
+
+export type ProjectStatus = "planned" | "in-progress" | "completed";
 
 export interface PipelineStage {
   label: string;
@@ -19,26 +35,33 @@ export interface Project {
   slug: string;
   title: string;
   category: ProjectCategory;
+  status: ProjectStatus;
   featured: boolean;
   period?: string;
   tagline: string;
   description: string;
   problem: string;
-  solution: string;
+  objectives?: string[];
+  solution?: string;
   pipeline: PipelineStage[];
   technologies: string[];
-  challenges: string[];
-  results: string[];
+  roadmap?: string[];
+  challenges?: string[];
+  results?: string[];
+  limitations?: string[];
+  improvements?: string[];
   screenshots: Screenshot[];
   github?: string;
+  plannedRepository?: string;
   demo?: string;
 }
 
-export interface DataArchitecture {
+export interface ArchitectureDiagram {
   id: string;
   title: string;
   description: string;
   useCase: string;
+  planned: boolean;
   stages: PipelineStage[];
 }
 
@@ -59,16 +82,23 @@ export interface Repository {
   topics: string[];
 }
 
+export type SkillLevel = "used" | "learning" | "exploring";
+
+export interface Skill {
+  name: string;
+  level: SkillLevel;
+}
+
 export interface SkillGroup {
   id: string;
   title: string;
   description: string;
   icon: IconName;
   primary: boolean;
-  skills: string[];
+  skills: Skill[];
 }
 
-export type ExperienceKind = "software" | "teaching" | "data";
+export type ExperienceKind = "devops" | "software" | "teaching" | "data";
 
 export interface Experience {
   id: string;
@@ -87,6 +117,7 @@ export interface Education {
   id: string;
   degree: string;
   option?: string;
+  targetTitle?: string;
   school: string;
   location: string;
   period: string;
@@ -108,11 +139,13 @@ export interface SiteConfig {
   name: string;
   initials: string;
   role: string;
+  heroRole: string;
   secondaryRole: string;
   stackLine: string;
   seoDescription: string;
   keywords: string[];
   heroStack: string[];
+  heroStackNote: string;
   heroDescription: string;
   location: string;
   addressLocality: string;
